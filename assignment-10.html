@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Assignment - 10 Tasks</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; background: #f4f7fb; color: #202938; }
+    header { background: #172554; color: white; padding: 28px 18px; text-align: center; }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; color: #dbeafe; }
+    main { max-width: 1000px; margin: 24px auto; padding: 0 16px 32px; }
+    .intro { background: white; padding: 18px 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #dbe3ef; }
+    .task { background: white; padding: 22px; margin: 18px 0; border-radius: 12px; border: 1px solid #dbe3ef; box-shadow: 0 3px 10px rgba(15,23,42,.04); }
+    .task h2 { margin-top: 0; color: #1d4ed8; font-size: 1.25rem; }
+    .task p { margin-bottom: 10px; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 14px; }
+    button { background: #2563eb; color: white; border: 0; padding: 10px 15px; border-radius: 7px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #1d4ed8; }
+    .output { margin-top: 12px; padding: 12px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 40px; }
+    .note { color: #475569; font-size: .95rem; }
+    footer { text-align: center; padding: 20px; color: #64748b; }
+    @media (max-width: 600px) { .task { padding: 16px; } pre { font-size: 12px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JavaScript Assignment</h1>
+    <p>10 Programs • Variables • Conditions • Arrays • Loops • Math</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>How to use this file</h2>
+      <p>Each question includes JavaScript code and a <strong>Run Example</strong> button. Open the file in a browser and click the buttons to see sample output. For input-based questions, the program uses <code>prompt()</code>.</p>
+      <p class="note">Note: Q2 and Q8 show formatted tables in the browser output; the JavaScript code also uses <code>console.table()</code> where required. Open browser Developer Tools (F12 → Console) to view console output.</p>
+    </section>
+
+    <section class="task">
+      <h2>Q1. Personalized Login Greeting</h2>
+      <p>Displays a greeting according to the current hour.</p>
+      <pre><code>const userName = prompt("Enter your name:") || "Guest";
+const currentHour = new Date().getHours();
+let greeting;
+
+if (currentHour &lt; 12) {
+  greeting = `Good Morning ${userName}!`;
+} else if (currentHour &lt;= 17) {
+  greeting = `Good Afternoon ${userName}!`;
+} else {
+  greeting = `Good Evening ${userName}!`;
+}
+
+console.log(greeting);</code></pre>
+      <button onclick="runQ1()">Run Example</button>
+      <div class="output" id="out1">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q2. Multi-Type Data Summary</h2>
+      <p>Identifies different JavaScript data types and prints a report with one <code>console.table()</code> statement.</p>
+      <pre><code>const userName = "Aarav";
+const age = 20;
+const isActive = true;
+const skills = ["HTML", "CSS", "JavaScript"];
+const user = { city: "Mathura", role: "Student" };
+const emptyValue = null;
+let notAssigned;
+
+const entries = [
+  { label: "userName", value: userName, type: typeof userName },
+  { label: "age", value: age, type: typeof age },
+  { label: "isActive", value: isActive, type: typeof isActive },
+  { label: "skills", value: skills.join(", "), type: Array.isArray(skills) ? "array" : typeof skills },
+  { label: "user", value: JSON.stringify(user), type: typeof user },
+  { label: "emptyValue", value: String(emptyValue), type: "null" },
+  { label: "notAssigned", value: String(notAssigned), type: typeof notAssigned }
+];
+
+console.table(entries);</code></pre>
+      <button onclick="runQ2()">Run Example</button>
+      <div class="output" id="out2">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q3. Monthly Expense Tracker</h2>
+      <p>Calculates total, average, and total after adding 10% tax.</p>
+      <pre><code>const expenses = {
+  food: 4500,
+  travel: 1200,
+  rent: 8000,
+  bills: 1500,
+  leisure: 1000
+};
+
+let total = 0;
+for (const amount of Object.values(expenses)) {
+  total += amount;
+}
+const average = total / Object.keys(expenses).length;
+total += total * 0.10;
+
+console.log(`Total before tax: ₹${(total / 1.10).toFixed(2)}`);
+console.log(`Average expense: ₹${average.toFixed(2)}`);
+console.log(`Final amount after 10% tax: ₹${total.toFixed(2)}`);</code></pre>
+      <button onclick="runQ3()">Run Example</button>
+      <div class="output" id="out3">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q4. Academic Performance Evaluator</h2>
+      <p>Checks the average percentage and automatically detains a student if any subject mark is below 35.</p>
+      <pre><code>const marks = [88, 76, 91, 82, 79];
+const total = marks.reduce((sum, mark) => sum + mark, 0);
+const average = total / marks.length;
+const percentage = (total / (marks.length * 100)) * 100;
+const failedSubject = marks.some(mark => mark &lt; 35);
+let result;
+
+if (failedSubject) {
+  result = "Detained";
+} else if (percentage &gt;= 85 && average &gt;= 85) {
+  result = "Promoted with Distinction";
+} else if (percentage &gt;= 50 && percentage &lt; 85) {
+  result = "Promoted";
+} else {
+  result = "Detained";
+}
+
+console.log(`Average: ${average.toFixed(2)}`);
+console.log(`Percentage: ${percentage.toFixed(2)}%`);
+console.log(`Result: ${result}`);</code></pre>
+      <button onclick="runQ4()">Run Example</button>
+      <div class="output" id="out4">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q5. Weather Activity Planner</h2>
+      <p>Suggests an activity using temperature, rain, wind speed, and logical operators.</p>
+      <pre><code>const temperature = 12;
+const isRaining = false;
+const windSpeed = 25;
+let advice;
+
+if (isRaining) {
+  advice = "Stay indoors with hot coffee.";
+} else if (temperature &gt; 35) {
+  advice = "Go swimming.";
+} else if (temperature &lt; 15 && windSpeed &gt; 20) {
+  advice = "Too cold and windy — stay home.";
+} else if (temperature &gt;= 20 || (temperature &gt;= 15 && windSpeed &lt;= 20)) {
+  advice = "Perfect day for a walk.";
+} else {
+  advice = "Stay comfortable and plan an indoor activity.";
+}
+
+console.log(advice);</code></pre>
+      <button onclick="runQ5()">Run Example</button>
+      <div class="output" id="out5">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q6. Progressive Discount System</h2>
+      <p>Applies a discount tier to the entered purchase amount and rounds the final price.</p>
+      <pre><code>const amount = Number(prompt("Enter total purchase amount:"));
+let discountPercent;
+
+if (amount &gt;= 10000) {
+  discountPercent = 25;
+} else if (amount &gt;= 5000) {
+  discountPercent = 15;
+} else if (amount &gt;= 2000) {
+  discountPercent = 5;
+} else {
+  discountPercent = 0;
+}
+
+const discount = amount * discountPercent / 100;
+const finalPrice = Math.round(amount - discount);
+
+console.log(`Original total: ₹${Math.round(amount)}`);
+console.log(`Discount: ${discountPercent}%`);
+console.log(`Final price: ₹${finalPrice}`);</code></pre>
+      <button onclick="runQ6()">Run Example</button>
+      <div class="output" id="out6">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q7. Smart Guessing Game (Number Range)</h2>
+      <p>Generates a secret number from 1–50 and checks a test guess.</p>
+      <pre><code>const secretNumber = Math.floor(Math.random() * 50) + 1;
+const userGuess = 25; // Change this test value if you want
+let message;
+
+if (userGuess === secretNumber) {
+  message = "Correct guess!";
+} else {
+  if (Math.abs(userGuess - secretNumber) &lt;= 3) {
+    message = "Very close!";
+  } else if (userGuess &gt; secretNumber && userGuess &gt;= 1 && userGuess &lt;= 50) {
+    message = "Too high";
+  } else if (userGuess &lt; secretNumber && userGuess &gt;= 1 && userGuess &lt;= 50) {
+    message = "Too low";
+  } else {
+    message = "Guess must be between 1 and 50.";
+  }
+}
+
+console.log(`Secret number: ${secretNumber}`);
+console.log(`Your guess: ${userGuess}`);
+console.log(message);</code></pre>
+      <button onclick="runQ7()">Run Example</button>
+      <div class="output" id="out7">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q8. Employee Salary Projection</h2>
+      <p>Projects salary for five years using a loop and yearly increment rate.</p>
+      <pre><code>let salary = 40000;
+const incrementRate = 8;
+const rows = [];
+
+for (let year = 1; year &lt;= 5; year++) {
+  salary += salary * incrementRate / 100;
+  salary = Math.round(salary);
+  rows.push({ year: `Year ${year}`, salary: `₹${salary.toLocaleString("en-IN")}` });
+}
+
+console.table(rows);</code></pre>
+      <button onclick="runQ8()">Run Example</button>
+      <div class="output" id="out8">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q9. Random Math Quiz Generator</h2>
+      <p>Creates a random arithmetic question and calculates the answer using <code>switch</code>.</p>
+      <pre><code>const number1 = Math.floor(Math.random() * 20) + 1;
+const number2 = Math.floor(Math.random() * 20) + 1;
+const operators = ["+", "-", "*", "/"];
+const operator = operators[Math.floor(Math.random() * operators.length)];
+let answer;
+
+switch (operator) {
+  case "+": answer = number1 + number2; break;
+  case "-": answer = number1 - number2; break;
+  case "*": answer = number1 * number2; break;
+  case "/": answer = (number1 / number2).toFixed(2); break;
+}
+
+console.log(`Question: ${number1} ${operator} ${number2} = ?`);
+console.log(`Correct answer: ${answer}`);</code></pre>
+      <button onclick="runQ9()">Run Example</button>
+      <div class="output" id="out9">Output will appear here.</div>
+    </section>
+
+    <section class="task">
+      <h2>Q10. Citizen Eligibility Validator</h2>
+      <p>Checks age and citizenship and prints the matching eligibility result.</p>
+      <pre><code>const age = 19;
+const isCitizen = true;
+let result;
+
+if (isCitizen) {
+  if (age &gt;= 18) {
+    if (age &gt;= 21) {
+      result = "Eligible for all services.";
+    } else {
+      result = "Eligible to vote only.";
+    }
+  } else {
+    result = "Not eligible yet.";
+  }
+} else if (!isCitizen && age &gt;= 18) {
+  result = "Only age criteria met.";
+} else {
+  result = "Not eligible yet.";
+}
+
+console.log(result);</code></pre>
+      <button onclick="runQ10()">Run Example</button>
+      <div class="output" id="out10">Output will appear here.</div>
+    </section>
+  </main>
+
+  <footer>JavaScript Assignment • All 10 questions in one HTML file</footer>
+
+  <script>
+    function show(id, text) { document.getElementById(id).textContent = text; }
+    function runQ1() {
+      const userName = prompt("Enter your name:") || "Guest";
+      const currentHour = new Date().getHours();
+      let greeting;
+      if (currentHour < 12) greeting = `Good Morning ${userName}!`;
+      else if (currentHour <= 17) greeting = `Good Afternoon ${userName}!`;
+      else greeting = `Good Evening ${userName}!`;
+      console.log(greeting);
+      show("out1", greeting);
+    }
+    function runQ2() {
+      const userName = "Aarav", age = 20, isActive = true;
+      const skills = ["HTML", "CSS", "JavaScript"];
+      const user = { city: "Mathura", role: "Student" };
+      const emptyValue = null;
+      let notAssigned;
+      const entries = [
+        { label: "userName", value: userName, type: typeof userName },
+        { label: "age", value: age, type: typeof age },
+        { label: "isActive", value: isActive, type: typeof isActive },
+        { label: "skills", value: skills.join(", "), type: Array.isArray(skills) ? "array" : typeof skills },
+        { label: "user", value: JSON.stringify(user), type: typeof user },
+        { label: "emptyValue", value: String(emptyValue), type: "null" },
+        { label: "notAssigned", value: String(notAssigned), type: typeof notAssigned }
+      ];
+      console.table(entries);
+      show("out2", entries.map(x => `${x.label} | ${x.value} | ${x.type}`).join("\n"));
+    }
+    function runQ3() {
+      const expenses = { food: 4500, travel: 1200, rent: 8000, bills: 1500, leisure: 1000 };
+      let total = 0;
+      Object.values(expenses).forEach(amount => total += amount);
+      const average = total / Object.keys(expenses).length;
+      const beforeTax = total;
+      total += total * 0.10;
+      const result = `Total before tax: ₹${beforeTax.toFixed(2)}\nAverage expense: ₹${average.toFixed(2)}\nFinal amount after 10% tax: ₹${total.toFixed(2)}`;
+      console.log(result); show("out3", result);
+    }
+    function runQ4() {
+      const marks = [88, 76, 91, 82, 79];
+      const total = marks.reduce((sum, mark) => sum + mark, 0);
+      const average = total / marks.length;
+      const percentage = total / (marks.length * 100) * 100;
+      const failedSubject = marks.some(mark => mark < 35);
+      let result;
+      if (failedSubject) result = "Detained";
+      else if (percentage >= 85 && average >= 85) result = "Promoted with Distinction";
+      else if (percentage >= 50 && percentage < 85) result = "Promoted";
+      else result = "Detained";
+      const output = `Marks: ${marks.join(", ")}\nAverage: ${average.toFixed(2)}\nPercentage: ${percentage.toFixed(2)}%\nResult: ${result}`;
+      console.log(output); show("out4", output);
+    }
+    function runQ5() {
+      const temperature = 12, isRaining = false, windSpeed = 25;
+      let advice;
+      if (isRaining) advice = "Stay indoors with hot coffee.";
+      else if (temperature > 35) advice = "Go swimming.";
+      else if (temperature < 15 && windSpeed > 20) advice = "Too cold and windy — stay home.";
+      else if (temperature >= 20 || (temperature >= 15 && windSpeed <= 20)) advice = "Perfect day for a walk.";
+      else advice = "Stay comfortable and plan an indoor activity.";
+      console.log(advice); show("out5", `Temperature: ${temperature}°C\nRaining: ${isRaining}\nWind speed: ${windSpeed} km/h\nAdvice: ${advice}`);
+    }
+    function runQ6() {
+      const input = prompt("Enter total purchase amount:");
+      if (input === null || input.trim() === "" || !Number.isFinite(Number(input)) || Number(input) < 0) {
+        show("out6", "Please enter a valid non-negative amount."); return;
+      }
+      const amount = Number(input);
+      let discountPercent;
+      if (amount >= 10000) discountPercent = 25;
+      else if (amount >= 5000) discountPercent = 15;
+      else if (amount >= 2000) discountPercent = 5;
+      else discountPercent = 0;
+      const finalPrice = Math.round(amount - amount * discountPercent / 100);
+      const output = `Original total: ₹${Math.round(amount)}\nDiscount: ${discountPercent}%\nFinal price: ₹${finalPrice}`;
+      console.log(output); show("out6", output);
+    }
+    function runQ7() {
+      const secretNumber = Math.floor(Math.random() * 50) + 1;
+      const userGuess = 25;
+      let message;
+      if (userGuess === secretNumber) message = "Correct guess!";
+      else {
+        if (userGuess >= 1 && userGuess <= 50 && Math.abs(userGuess - secretNumber) <= 3) message = "Very close!";
+        else if (userGuess > secretNumber && userGuess >= 1 && userGuess <= 50) message = "Too high";
+        else if (userGuess < secretNumber && userGuess >= 1 && userGuess <= 50) message = "Too low";
+        else message = "Guess must be between 1 and 50.";
+      }
+      const output = `Secret number: ${secretNumber}\nYour guess: ${userGuess}\n${message}`;
+      console.log(output); show("out7", output);
+    }
+    function runQ8() {
+      let salary = 40000;
+      const incrementRate = 8;
+      const rows = [];
+      for (let year = 1; year <= 5; year++) {
+        salary += salary * incrementRate / 100;
+        salary = Math.round(salary);
+        rows.push({ year: `Year ${year}`, salary: `₹${salary.toLocaleString("en-IN")}` });
+      }
+      console.table(rows);
+      show("out8", rows.map(row => `${row.year}: ${row.salary}`).join("\n"));
+    }
+    function runQ9() {
+      const number1 = Math.floor(Math.random() * 20) + 1;
+      const number2 = Math.floor(Math.random() * 20) + 1;
+      const operators = ["+", "-", "*", "/"];
+      const operator = operators[Math.floor(Math.random() * operators.length)];
+      let answer;
+      switch (operator) {
+        case "+": answer = number1 + number2; break;
+        case "-": answer = number1 - number2; break;
+        case "*": answer = number1 * number2; break;
+        case "/": answer = (number1 / number2).toFixed(2); break;
+      }
+      const output = `Question: ${number1} ${operator} ${number2} = ?\nCorrect answer: ${answer}`;
+      console.log(output); show("out9", output);
+    }
+    function runQ10() {
+      const age = 19, isCitizen = true;
+      let result;
+      if (isCitizen) {
+        if (age >= 18) {
+          if (age >= 21) result = "Eligible for all services.";
+          else result = "Eligible to vote only.";
+        } else result = "Not eligible yet.";
+      } else if (!isCitizen && age >= 18) result = "Only age criteria met.";
+      else result = "Not eligible yet.";
+      console.log(result); show("out10", `Age: ${age}\nCitizen: ${isCitizen}\nResult: ${result}`);
+    }
+  </script>
+</body>
+</html>
