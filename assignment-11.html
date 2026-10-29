@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Assignment 2 - 10 Tasks</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; background: #f4f7fb; color: #202938; }
+    header { background: #172554; color: #fff; padding: 28px 18px; text-align: center; }
+    header h1 { margin: 0 0 8px; }
+    header p { margin: 0; color: #dbeafe; }
+    main { max-width: 1000px; margin: 24px auto; padding: 0 16px 32px; }
+    .intro, .task { background: #fff; border: 1px solid #dbe3ef; border-radius: 12px; }
+    .intro { padding: 18px 20px; margin-bottom: 20px; }
+    .task { padding: 22px; margin: 18px 0; box-shadow: 0 3px 10px rgba(15,23,42,.04); }
+    .task h2 { margin-top: 0; color: #1d4ed8; font-size: 1.25rem; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 14px; }
+    button { background: #2563eb; color: #fff; border: 0; padding: 10px 15px; border-radius: 7px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #1d4ed8; }
+    .output { margin-top: 12px; padding: 12px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 40px; }
+    .note { color: #475569; font-size: .95rem; }
+    footer { text-align: center; padding: 20px; color: #64748b; }
+    @media (max-width: 600px) { .task { padding: 16px; } pre { font-size: 12px; } }
+  </style>
+</head>
+<body>
+<header>
+  <h1>JavaScript Assignment — Set 2</h1>
+  <p>10 Programs • Scope • Strings • Math • Arrays • Logic • Loops</p>
+</header>
+<main>
+  <section class="intro">
+    <h2>How to use this file</h2>
+    <p>Every question includes its JavaScript code and a <strong>Run Example</strong> button. Open this HTML file in a browser and click the buttons to test each program.</p>
+    <p class="note">Console output is also printed where required. Press F12 and open the Console tab to see it. Random-score questions may show different results each time.</p>
+  </section>
+
+  <section class="task">
+    <h2>Q1. Scope Conflict Resolver</h2>
+    <p>Uses a global bonus and a local salary/permanent-status variable.</p>
+    <pre><code>let bonus = 5000;
+
+function calculateSalary(isPermanent) {
+  let salary = 40000;
+  if (isPermanent) {
+    salary += bonus;
+  }
+  console.log(`Total salary: ₹${salary}`);
+  return salary;
+}
+
+calculateSalary(true);
+calculateSalary(false);
+console.log(`Global bonus remains: ₹${bonus}`);</code></pre>
+    <button onclick="runQ1()">Run Example</button>
+    <div class="output" id="out1">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q2. String Manipulation Report</h2>
+    <p>Cleans the product title, capitalizes each word, replaces “Pro”, and displays its length.</p>
+    <pre><code>const productName = " wireless headphones PRO ";
+const trimmed = productName.trim().toLowerCase();
+const capitalized = trimmed.split(" ")
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(" ");
+const cleanedTitle = capitalized.replace("Pro", "Pro Edition");
+
+console.log(`Product title: ${cleanedTitle}`);
+console.log(`Length: ${cleanedTitle.length}`);</code></pre>
+    <button onclick="runQ2()">Run Example</button>
+    <div class="output" id="out2">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q3. Math Utility Dashboard</h2>
+    <p>Uses Math.round(), Math.sqrt(), Math.pow(), and Math.random().</p>
+    <pre><code>const x = 16.75;
+const rounded = Math.round(x);
+const squareRoot = Math.sqrt(x);
+const cube = Math.pow(x, 3);
+const randomNumber = Math.floor(Math.random() * 41) + 10;
+
+const summary = `Number: ${x}
+Rounded value: ${rounded}
+Square root: ${squareRoot.toFixed(2)}
+Power (x³): ${cube.toFixed(2)}
+Random number (10–50): ${randomNumber}`;
+
+console.log(summary);</code></pre>
+    <button onclick="runQ3()">Run Example</button>
+    <div class="output" id="out3">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q4. Array Performance Analyzer</h2>
+    <p>Creates eight random scores and calculates highest, lowest, average, and passing students.</p>
+    <pre><code>const scores = Array.from({ length: 8 },
+  () => Math.floor(Math.random() * 71) + 30);
+const highest = Math.max(...scores);
+const lowest = Math.min(...scores);
+const total = scores.reduce((sum, score) => sum + score, 0);
+const average = total / scores.length;
+const passed = scores.filter(score => score >= 50).length;
+const labels = scores.map((score, index) => `Student ${index + 1}: ${score}`);
+
+console.log(`Scores: ${scores.join(", ")}`);
+console.log(`Highest: ${highest}`);
+console.log(`Lowest: ${lowest}`);
+console.log(`Average: ${average.toFixed(2)}`);
+console.log(`Students passed: ${passed}/8`);</code></pre>
+    <button onclick="runQ4()">Run Example</button>
+    <div class="output" id="out4">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q5. Boolean Logic Access System</h2>
+    <p>Checks alarm, door, window, and owner status. Try different combinations using the button.</p>
+    <pre><code>const isDoorLocked = true;
+const isWindowClosed = true;
+const isAlarmOn = true;
+const isOwnerInside = true;
+
+const isSecure = isAlarmOn && isDoorLocked &&
+  isWindowClosed && isOwnerInside;
+console.log(isSecure ? "Secure" : "Unsafe");
+
+// Example of OR and NOT logic:
+console.log((!isDoorLocked || !isWindowClosed) ? "Check entry points" : "Entry points secured");</code></pre>
+    <button onclick="runQ5()">Run Example</button>
+    <div class="output" id="out5">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q6. Event-Based Counter Simulation</h2>
+    <p>Increment and decrement functions update a shared counter; a nested function reads the updated value.</p>
+    <pre><code>let count = 0;
+
+function showCount() {
+  function display() {
+    console.log(`Current count: ${count}`);
+    return count;
+  }
+  return display();
+}
+
+function increment() {
+  count++;
+  return showCount();
+}
+
+function decrement() {
+  count--;
+  return showCount();
+}
+
+increment();
+increment();
+decrement();</code></pre>
+    <button onclick="runQ6()">Run Example</button>
+    <div class="output" id="out6">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q7. Customer Feedback Processor</h2>
+    <p>Counts words and checks for negative terms “bad” or “poor”.</p>
+    <pre><code>const feedback = "Great product! Fast delivery and amazing sound quality!";
+const words = feedback.trim().split(/\\s+/);
+const lowerFeedback = feedback.toLowerCase();
+const hasNegativeWords = lowerFeedback.includes("bad") ||
+  lowerFeedback.includes("poor");
+const result = hasNegativeWords ? "Needs Improvement" : "Positive Feedback";
+
+console.log(`Feedback: ${feedback}`);
+console.log(`Word count: ${words.length}`);
+console.log(`Result: ${result}`);</code></pre>
+    <button onclick="runQ7()">Run Example</button>
+    <div class="output" id="out7">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q8. Dynamic Discount Evaluator</h2>
+    <p>Applies category discounts and an additional 5% discount if the original cart total exceeds ₹50,000.</p>
+    <pre><code>const cart = [
+  { item: "Laptop", category: "electronics", price: 45000 },
+  { item: "Shoes", category: "fashion", price: 2500 },
+  { item: "Book", category: "education", price: 600 }
+];
+
+const subtotal = cart.reduce((sum, product) => sum + product.price, 0);
+let discountedTotal = 0;
+
+for (const product of cart) {
+  let discountRate = 0;
+  if (product.category === "electronics") discountRate = 0.10;
+  else if (product.category === "fashion") discountRate = 0.05;
+  discountedTotal += product.price * (1 - discountRate);
+}
+
+if (subtotal > 50000) {
+  discountedTotal *= 0.95;
+}
+
+console.log(`Original cart total: ₹${subtotal.toFixed(2)}`);
+console.log(`Final cart total: ₹${discountedTotal.toFixed(2)}`);</code></pre>
+    <button onclick="runQ8()">Run Example</button>
+    <div class="output" id="out8">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q9. Odd–Even Number Analyzer</h2>
+    <p>Checks each number from 1 to 30. FizzBuzz takes priority when a number is divisible by both 3 and 5.</p>
+    <pre><code>const results = [];
+
+for (let number = 1; number <= 30; number++) {
+  let label;
+  if (number % 3 === 0 && number % 5 === 0) {
+    label = "FizzBuzz";
+  } else if (number % 2 === 0) {
+    label = "Even";
+  } else {
+    label = "Odd";
+  }
+  results.push(`${number}: ${label}`);
+}
+
+console.log(results);</code></pre>
+    <button onclick="runQ9()">Run Example</button>
+    <div class="output" id="out9">Output will appear here.</div>
+  </section>
+
+  <section class="task">
+    <h2>Q10. Departmental Employee Evaluator</h2>
+    <p>Assigns a performance label to each department using nested if-else statements.</p>
+    <pre><code>const departments = [
+  ["HR", 72],
+  ["Finance", 88],
+  ["Tech", 95],
+  ["Support", 63]
+];
+
+for (const department of departments) {
+  const name = department[0];
+  const score = department[1];
+  let performance;
+
+  if (score >= 90) performance = "Excellent";
+  else if (score >= 75) performance = "Good";
+  else if (score >= 60) performance = "Average";
+  else performance = "Needs Improvement";
+
+  console.log(`${name}: ${score} — ${performance}`);
+}</code></pre>
+    <button onclick="runQ10()">Run Example</button>
+    <div class="output" id="out10">Output will appear here.</div>
+  </section>
+</main>
+<footer>JavaScript Assignment — Set 2 • All 10 questions in one HTML file</footer>
+
+<script>
+  function show(id, value) { document.getElementById(id).textContent = value; }
+
+  let globalBonus = 5000;
+  function runQ1() {
+    function calculateSalary(isPermanent) {
+      let salary = 40000;
+      if (isPermanent) salary += globalBonus;
+      console.log(`Total salary: ₹${salary}`);
+      return salary;
+    }
+    const permanentSalary = calculateSalary(true);
+    const temporarySalary = calculateSalary(false);
+    const output = `Permanent employee: ₹${permanentSalary}\nNon-permanent employee: ₹${temporarySalary}\nGlobal bonus remains: ₹${globalBonus}`;
+    console.log(output); show("out1", output);
+  }
+
+  function runQ2() {
+    const productName = " wireless headphones PRO ";
+    const trimmed = productName.trim().toLowerCase();
+    const capitalized = trimmed.split(" ").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    const cleanedTitle = capitalized.replace("Pro", "Pro Edition");
+    const output = `Original: "${productName}"\nProduct title: ${cleanedTitle}\nLength: ${cleanedTitle.length}`;
+    console.log(output); show("out2", output);
+  }
+
+  function runQ3() {
+    const x = 16.75;
+    const rounded = Math.round(x);
+    const squareRoot = Math.sqrt(x);
+    const cube = Math.pow(x, 3);
+    const randomNumber = Math.floor(Math.random() * 41) + 10;
+    const output = `Number: ${x}\nRounded value: ${rounded}\nSquare root: ${squareRoot.toFixed(2)}\nPower (x³): ${cube.toFixed(2)}\nRandom number (10–50): ${randomNumber}`;
+    console.log(output); show("out3", output);
+  }
+
+  function runQ4() {
+    const scores = Array.from({ length: 8 }, () => Math.floor(Math.random() * 71) + 30);
+    const highest = Math.max(...scores);
+    const lowest = Math.min(...scores);
+    const total = scores.reduce((sum, score) => sum + score, 0);
+    const average = total / scores.length;
+    const passed = scores.filter(score => score >= 50).length;
+    const studentRows = scores.map((score, index) => `Student ${index + 1}: ${score}`).join("\n");
+    const output = `${studentRows}\n\nHighest: ${highest}\nLowest: ${lowest}\nAverage: ${average.toFixed(2)}\nStudents passed: ${passed}/8`;
+    console.log(output); show("out4", output);
+  }
+
+  function runQ5() {
+    const cases = [
+      { isDoorLocked: true, isWindowClosed: true, isAlarmOn: true, isOwnerInside: true },
+      { isDoorLocked: true, isWindowClosed: false, isAlarmOn: true, isOwnerInside: true },
+      { isDoorLocked: true, isWindowClosed: true, isAlarmOn: false, isOwnerInside: false }
+    ];
+    const lines = cases.map((c, i) => {
+      const secure = c.isAlarmOn && c.isDoorLocked && c.isWindowClosed && c.isOwnerInside;
+      const extra = (!c.isDoorLocked || !c.isWindowClosed) ? "Check entry points" : "Entry points secured";
+      return `Test ${i + 1}: ${secure ? "Secure" : "Unsafe"}\n  Door locked: ${c.isDoorLocked}, Window closed: ${c.isWindowClosed}, Alarm on: ${c.isAlarmOn}, Owner inside: ${c.isOwnerInside}\n  ${extra}`;
+    });
+    const output = lines.join("\n\n");
+    console.log(output); show("out5", output);
+  }
+
+  function runQ6() {
+    let count = 0;
+    const logs = [];
+    function showCount() {
+      function display() {
+        logs.push(`Current count: ${count}`);
+        return count;
+      }
+      return display();
+    }
+    function increment() { count++; return showCount(); }
+    function decrement() { count--; return showCount(); }
+    increment(); increment(); decrement();
+    const output = logs.join("\n");
+    console.log(output); show("out6", output);
+  }
+
+  function runQ7() {
+    const feedback = "Great product! Fast delivery and amazing sound quality!";
+    const words = feedback.trim().split(/\s+/);
+    const lowerFeedback = feedback.toLowerCase();
+    const hasNegativeWords = lowerFeedback.includes("bad") || lowerFeedback.includes("poor");
+    const result = hasNegativeWords ? "Needs Improvement" : "Positive Feedback";
+    const output = `Feedback: ${feedback}\nWord count: ${words.length}\nContains "bad" or "poor": ${hasNegativeWords}\nResult: ${result}`;
+    console.log(output); show("out7", output);
+  }
+
+  function runQ8() {
+    const cart = [
+      { item: "Laptop", category: "electronics", price: 45000 },
+      { item: "Shoes", category: "fashion", price: 2500 },
+      { item: "Book", category: "education", price: 600 }
+    ];
+    const subtotal = cart.reduce((sum, product) => sum + product.price, 0);
+    let discountedTotal = 0;
+    const lines = [];
+    for (const product of cart) {
+      let discountRate = 0;
+      if (product.category === "electronics") discountRate = 0.10;
+      else if (product.category === "fashion") discountRate = 0.05;
+      const finalItemPrice = product.price * (1 - discountRate);
+      discountedTotal += finalItemPrice;
+      lines.push(`${product.item}: ₹${product.price.toFixed(2)} → ₹${finalItemPrice.toFixed(2)} (${discountRate * 100}% off)`);
+    }
+    const extraDiscountApplied = subtotal > 50000;
+    if (extraDiscountApplied) discountedTotal *= 0.95;
+    const output = `${lines.join("\n")}\n\nOriginal cart total: ₹${subtotal.toFixed(2)}\nExtra 5% discount applied: ${extraDiscountApplied}\nFinal cart total: ₹${discountedTotal.toFixed(2)}`;
+    console.log(output); show("out8", output);
+  }
+
+  function runQ9() {
+    const results = [];
+    for (let number = 1; number <= 30; number++) {
+      let label;
+      if (number % 3 === 0 && number % 5 === 0) label = "FizzBuzz";
+      else if (number % 2 === 0) label = "Even";
+      else label = "Odd";
+      results.push(`${number}: ${label}`);
+    }
+    const output = results.join("\n");
+    console.log(results); show("out9", output);
+  }
+
+  function runQ10() {
+    const departments = [["HR", 72], ["Finance", 88], ["Tech", 95], ["Support", 63]];
+    const rows = [];
+    for (const department of departments) {
+      const name = department[0], score = department[1];
+      let performance;
+      if (score >= 90) performance = "Excellent";
+      else if (score >= 75) performance = "Good";
+      else if (score >= 60) performance = "Average";
+      else performance = "Needs Improvement";
+      rows.push(`${name}: ${score} — ${performance}`);
+    }
+    const output = rows.join("\n");
+    console.log(output); show("out10", output);
+  }
+</script>
+</body>
+</html>
