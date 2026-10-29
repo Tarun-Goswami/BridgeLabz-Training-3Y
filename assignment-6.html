@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Practical Assignment — All 10 Tasks</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f3f6fb;color:#1f2937;font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+header{background:#172554;color:#fff;padding:22px 16px;text-align:center}
+header p{margin:4px 0 0}
+nav{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;justify-content:center;gap:4px;background:#0f172a;padding:10px}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:6px;transition:all .3s ease}
+nav a:hover{background:#2563eb}
+main{max-width:1150px;margin:auto;padding:20px}
+.task{background:#fff;margin:24px 0;padding:24px;border-radius:14px;box-shadow:0 5px 18px #0f172a12;scroll-margin-top:90px}
+.task h2{margin-top:0;color:#1d4ed8}
+.demo-row{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap}
+footer{background:#172554;color:white;text-align:center;padding:18px;margin-top:25px}
+.small-note{color:#64748b;font-size:.9rem}
+button{border:0;background:#1d4ed8;color:#fff;padding:10px 16px;border-radius:7px;cursor:pointer}
+button:hover{background:#1e40af}
+
+/* TASK 1: border styles, padding, flex, hover transition */
+.border-box{padding:16px;border:5px solid #2563eb;border-radius:12px;transition:border-color .4s ease;min-width:125px;text-align:center}
+.border-box:hover{border-color:#e11d48}
+.border-dashed{border-style:dashed;padding:24px}
+.border-double{border-style:double;border-width:7px;padding:30px}
+.border-groove{border-style:groove;border-color:#b45309}
+.border-rounded{border-radius:28px}
+
+/* TASK 2: dimensions and overflow */
+.size-box{display:flex;align-items:center;justify-content:center;text-align:center;min-height:100px;padding:12px;overflow:auto;border-radius:8px}
+.size-px{width:150px;height:110px;background:#fecaca}
+.size-percent{width:30%;min-height:150px;max-width:280px;background:#bbf7d0}
+.size-vh{width:12em;height:18vh;min-height:100px;max-width:220px;background:#bfdbfe}
+
+/* TASK 3: gradients, fixed header/footer and parallax */
+.gradient-section{min-height:240px;display:flex;align-items:center;justify-content:center;text-align:center;padding:25px;color:#fff;background-attachment:fixed;background-size:cover}
+.linear-gradient{background-image:linear-gradient(120deg,#0f766e,#2563eb,#7c3aed)}
+.radial-gradient{background-image:radial-gradient(circle at center,#f97316,#9f1239 70%)}
+
+/* TASK 4: cards, shadows, text-shadow, hover */
+.shadow-card{flex:1 1 220px;max-width:300px;padding:24px;background:#fff;border-radius:12px;transition:all .3s ease}
+.shadow-card h3{text-shadow:2px 2px 3px #94a3b8}
+.shadow-one{box-shadow:2px 3px 8px #64748b}
+.shadow-two{box-shadow:0 10px 24px #0f172a35}
+.shadow-three{box-shadow:0 0 18px #60a5fa99}
+.shadow-card:hover{transform:translateY(-8px);box-shadow:0 18px 30px #0f172a35}
+
+/* TASK 5: advanced selectors; comments explain selector types */
+/* Attribute selectors: target elements by an attribute/value. */
+#selectors input[type="text"]{border:2px solid #2563eb;padding:8px}
+#selectors a[href^="https"]{color:#15803d}
+/* Pseudo-classes: style an element in a state or position. */
+#selectors li:hover{background:#dbeafe}
+#selectors li:nth-child(odd){font-weight:bold}
+#selectors input:focus{outline:3px solid #f59e0b}
+/* Pseudo-elements: add generated content before and after an element. */
+#selectors .pseudo::before{content:"★ ";color:#eab308}
+#selectors .pseudo::after{content:" ★";color:#eab308}
+/* Child combinator > selects direct children. */
+#selectors .parent>p{color:#1d4ed8}
+/* Adjacent sibling + selects the immediately following sibling. */
+#selectors h4+p{color:#15803d}
+/* General sibling ~ selects later siblings sharing the same parent. */
+#selectors h4~span{border-bottom:2px solid #e11d48}
+/* Descendant selector (space) selects nested matching elements. */
+#selectors section p{font-style:italic}
+
+/* TASK 6: transforms */
+.transform-box{width:110px;height:90px;display:flex;align-items:center;justify-content:center;background:#0f766e;color:white;border-radius:10px;transition:all 0.4s ease;margin:8px auto}
+.rotate:hover{transform:rotate(12deg)}
+.scale:hover{transform:scale(1.15)}
+.translate:hover{transform:translateY(-15px)}
+.skew:hover{transform:skew(12deg)}
+
+/* TASK 7: typography */
+.article-sample{max-width:800px;margin:auto;font-family:Georgia,serif;font-size:1.05rem;line-height:1.9;letter-spacing:.3px;text-align:justify}
+.article-sample p::first-letter{font-size:2.2rem;font-weight:bold;color:#1d4ed8}
+.article-sample p::first-line{font-weight:bold}
+.article-sample mark{background:#fef08a;color:#713f12}
+.article-sample strong{color:#be123c}
+.article-sample em{color:#0369a1}
+
+/* TASK 8: box model */
+.margin-layer{background:#fef3c7;outline:2px dashed #dc2626;padding:24px;margin:12px}
+.border-layer{border:10px solid #2563eb;background:#dbeafe;padding:18px}
+.padding-layer{background:#bbf7d0;padding:20px}
+.content-layer{background:#fff;padding:15px;text-align:center}
+.model-examples{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.model-example{width:220px;padding:20px;border:10px solid #334155;background:#e0f2fe}
+.content-box{box-sizing:content-box}
+.border-box-sizing{box-sizing:border-box}
+
+/* TASK 9: form, outlines, focus */
+.demo-form{max-width:520px;margin:auto;padding:20px;border-radius:12px;background:#f8fafc;box-shadow:0 5px 18px #0f172a18}
+.demo-form label{display:block;margin:12px 0 5px;font-weight:bold}
+.demo-form input,.demo-form textarea{display:block;width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;box-shadow:0 2px 5px #0f172a0c;font:inherit;margin-bottom:14px}
+.demo-form input:focus,.demo-form textarea:focus{outline:3px solid #60a5fa;outline-offset:3px;border-color:#2563eb}
+
+/* TASK 10: navigation transitions and responsive stack */
+.sample-nav{display:flex;justify-content:center;flex-wrap:wrap;background:#1e293b;border-radius:8px;padding:8px;gap:5px}
+.sample-nav a{color:white;text-decoration:none;padding:12px 18px;border:1px solid #475569;border-radius:6px;transition:all 0.3s ease}
+.sample-nav a:hover{background:#2563eb;border-color:#93c5fd;transform:translateY(-2px)}
+.sample-nav a.active{background:#0f766e;border-bottom:4px solid #5eead4}
+@media(max-width:700px){.sample-nav{flex-direction:column}.sample-nav a{text-align:center}.size-percent{width:80%}.gradient-section{background-attachment:scroll}}
+</style>
+</head>
+<body>
+<header>
+  <h1>CSS Practical Assignment</h1>
+  <p>All 10 Tasks in One HTML File</p>
+</header>
+<nav aria-label="Assignment navigation">
+  <a href="#task1">Task 1</a><a href="#task2">Task 2</a><a href="#task3">Task 3</a><a href="#task4">Task 4</a><a href="#task5">Task 5</a><a href="#task6">Task 6</a><a href="#task7">Task 7</a><a href="#task8">Task 8</a><a href="#task9">Task 9</a><a href="#task10">Task 10</a>
+</nav>
+<main>
+<section class="task" id="task1">
+  <h2>1. Borders and Padding Demonstration</h2>
+  <p>Different border styles, corner radius, padding values, Flexbox alignment, and a smooth hover border-color change.</p>
+  <div class="demo-row">
+    <div class="border-box">Solid border</div>
+    <div class="border-box border-dashed">Dashed border</div>
+    <div class="border-box border-double">Double border</div>
+    <div class="border-box border-groove border-rounded">Groove + rounded</div>
+  </div>
+</section>
+<section class="task" id="task2">
+  <h2>2. Height and Width Practice Layout</h2>
+  <p>Boxes demonstrate px, %, em, and vh units, plus min-height, max-width, and overflow.</p>
+  <div class="demo-row">
+    <div class="size-box size-px">150px wide<br>110px high</div>
+    <div class="size-box size-percent">30% width<br>min-height: 150px</div>
+    <div class="size-box size-vh">12em width<br>18vh height<br>overflow: auto</div>
+  </div>
+</section>
+<section class="task" id="task3">
+  <h2>3. Gradient Background Webpage</h2>
+  <p>The top header and bottom footer stay fixed. The linear-gradient section uses background-attachment: fixed on larger screens.</p>
+  <div class="gradient-section linear-gradient"><div><h3>Linear Gradient</h3><p>Color transitions along a straight line.</p></div></div>
+  <div class="gradient-section radial-gradient"><div><h3>Radial Gradient</h3><p>Color spreads outward from a central point.</p></div></div>
+</section>
+<section class="task" id="task4">
+  <h2>4. Shadows and Depth Effect Layout</h2>
+  <p>Each card has a different initial shadow and lifts on hover. The headings use text-shadow.</p>
+  <div class="demo-row">
+    <article class="shadow-card shadow-one"><h3>Profile One</h3><p>Subtle shadow for a clean card.</p></article>
+    <article class="shadow-card shadow-two"><h3>Profile Two</h3><p>Deeper shadow for more elevation.</p></article>
+    <article class="shadow-card shadow-three"><h3>Profile Three</h3><p>Soft blue glow around the card.</p></article>
+  </div>
+</section>
+<section class="task" id="selectors">
+  <h2 class="pseudo">5. Advanced CSS Selectors</h2>
+  <p>Attribute selectors, pseudo-classes, pseudo-elements, and CSS combinators are demonstrated below.</p>
+  <p><label for="selector-input">Text input:</label> <input id="selector-input" type="text" placeholder="Focus this input"></p>
+  <p><a href="https://example.com">Link beginning with https</a></p>
+  <ul><li>First item</li><li>Second item</li><li>Third item</li><li>Fourth item</li></ul>
+  <div class="parent"><p>Direct child selected by div &gt; p.</p><section><p>Nested descendant selected by section p.</p></section></div>
+  <h4>Combinator example heading</h4><p>This next paragraph uses the adjacent sibling selector (+).</p><span>This span uses the general sibling selector (~).</span>
+</section>
+<section class="task" id="task6">
+  <h2>6. CSS Transformations Showcase</h2>
+  <p>Hover over each box to see the transformation.</p>
+  <div class="demo-row">
+    <div><div class="transform-box rotate">Rotate</div><p>rotate(12deg)</p></div>
+    <div><div class="transform-box scale">Scale</div><p>scale(1.15)</p></div>
+    <div><div class="transform-box translate">Translate</div><p>translateY(-15px)</p></div>
+    <div><div class="transform-box skew">Skew</div><p>skew(12deg)</p></div>
+  </div>
+</section>
+<section class="task" id="task7">
+  <h2>7. Typography and Text Styling</h2>
+  <article class="article-sample">
+    <h3>Why Clear Typography Matters</h3>
+    <p>Good typography makes written information easier to follow. Different font families, sizes, and weights create a clear visual order for readers.</p>
+    <p>Use <mark>highlighting</mark> for important ideas, <strong>strong text</strong> for emphasis, and <em>italic text</em> for a different tone. Comfortable line-height and letter spacing improve readability.</p>
+  </article>
+</section>
+<section class="task" id="task8">
+  <h2>8. Box Model Exploration</h2>
+  <p>The outer yellow layer represents margin, blue represents border, green represents padding, and white is the content area.</p>
+  <div class="demo-row">
+    <div class="margin-layer"><div class="border-layer"><div class="padding-layer"><div class="content-layer">CONTENT</div></div></div></div>
+  </div>
+  <h3>content-box vs border-box</h3>
+  <div class="model-examples">
+    <div><div class="model-example content-box">content-box: width applies to content only.</div><p>Default sizing</p></div>
+    <div><div class="model-example border-box-sizing">border-box: width includes padding and border.</div><p>Border-box sizing</p></div>
+  </div>
+</section>
+<section class="task" id="task9">
+  <h2>9. Outline and Focus Styling Form</h2>
+  <p>Click or tab into the fields to see the outline color and offset change.</p>
+  <form class="demo-form" action="#" method="post">
+    <label for="form-name">Name</label><input id="form-name" name="name" type="text" placeholder="Enter your name">
+    <label for="form-email">Email</label><input id="form-email" name="email" type="email" placeholder="Enter your email">
+    <label for="form-message">Message</label><textarea id="form-message" name="message" rows="4" placeholder="Write a message"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+<section class="task" id="task10">
+  <h2>10. Navigation Bar with Transitions and Hover Effects</h2>
+  <p>Hover over the links. The active link has a distinct background and underline. At widths below 700px, the links stack vertically.</p>
+  <nav class="sample-nav" aria-label="Example navigation">
+    <a class="active" href="#task1">Home</a><a href="#task2">About</a><a href="#task4">Services</a><a href="#task7">Gallery</a><a href="#task9">Contact</a>
+  </nav>
+</section>
+</main>
+<footer><p>© 2026 CSS Practical Assignment</p></footer>
+</body>
+</html>
