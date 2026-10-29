@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap Practical Assignment - 10 Tasks</title>
+  <!-- Bootstrap CSS CDN: Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Font for the themed blog section -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bs-primary: #5b45d6;
+      --bs-primary-rgb: 91, 69, 214;
+      --bs-font-sans-serif: "Poppins", Arial, sans-serif;
+    }
+    body { font-family: var(--bs-font-sans-serif); background:#f8fafc; color:#1e293b; }
+    html { scroll-behavior:smooth; }
+    .assignment-header { background:linear-gradient(120deg,#172554,#5b45d6); color:white; }
+    .assignment-header .nav-link { color:#e0e7ff; }
+    .assignment-header .nav-link:hover { color:white; }
+    .section-block { padding:3rem 0; border-bottom:1px solid #e2e8f0; }
+    .section-title { font-weight:700; margin-bottom:.6rem; color:#243b80; }
+    .demo-card { transition:transform .25s ease, box-shadow .25s ease; }
+    .demo-card:hover { transform:translateY(-5px); box-shadow:0 1rem 2rem rgba(15,23,42,.14)!important; }
+    .hero { background:linear-gradient(135deg,#eef2ff,#f5f3ff); border-radius:1.25rem; }
+    .portfolio-photo { width:170px; height:170px; object-fit:cover; }
+    .product-photo { height:180px; object-fit:cover; }
+    .menu-photo { max-height:300px; width:100%; object-fit:cover; border-radius:.75rem; }
+    .blog-theme { --bs-primary:#b45309; --bs-primary-rgb:180,83,9; font-family:"Poppins",sans-serif; background:#fffaf5; }
+    .blog-theme .section-title { color:#92400e; }
+    .blog-theme .btn-primary { background:#b45309; border-color:#b45309; }
+    .blog-theme .card { border-color:#fed7aa; }
+    .summary-well { background:#f8fafc; border:1px solid #cbd5e1; border-radius:.75rem; padding:1.25rem; }
+    .pricing-card { height:100%; transition:transform .25s ease,box-shadow .25s ease; }
+    .pricing-card:hover { transform:translateY(-6px); box-shadow:0 1rem 2rem rgba(15,23,42,.18); }
+    .travel-slide img { height:430px; object-fit:cover; filter:brightness(.72); }
+    .carousel-caption { text-shadow:0 2px 8px rgba(0,0,0,.7); }
+    footer { background:#172554; color:#e2e8f0; }
+    @media (max-width:767.98px) {
+      .section-block { padding:2.2rem 0; }
+      .travel-slide img { height:300px; }
+      .portfolio-actions .btn { width:100%; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="assignment-header" id="home">
+    <nav class="navbar navbar-expand-lg navbar-dark container py-3">
+      <a class="navbar-brand fw-bold" href="#home">Bootstrap Lab</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#task1">Landing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#task2">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#task3">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#task8">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#task10">Travel</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container text-center py-4">
+      <p class="mb-1 text-uppercase small fw-semibold">Bootstrap 5 · Practical Assignment</p>
+      <h1 class="display-5 fw-bold">10 Bootstrap Components & Layouts</h1>
+      <p class="lead mb-0">Responsive examples using Bootstrap grid, utilities, cards, alerts, badges, pagination, and carousel.</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- Task 1 -->
+    <section class="section-block" id="task1">
+      <div class="container">
+        <h2 class="section-title">1. Company Landing Page</h2>
+        <p class="lead">A responsive startup landing page built with Bootstrap containers, rows, columns, and buttons.</p>
+        <div class="hero p-4 p-md-5">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <span class="badge text-bg-primary mb-3">Ideas into impact</span>
+              <h3 class="display-6 fw-bold">Build something amazing.</h3>
+              <p class="lead">We help growing teams turn bold ideas into simple, effective digital products.</p>
+              <a href="#task2" class="btn btn-primary btn-lg">Get Started</a>
+            </div>
+            <div class="col-lg-5 text-center">
+              <img class="img-fluid rounded-4 shadow" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Modern startup office">
+            </div>
+          </div>
+        </div>
+        <p class="small text-secondary mt-3 mb-0">Bootstrap CDN is linked in the document head; the navbar toggle and carousel use Bootstrap's JavaScript bundle at the end of this file.</p>
+      </div>
+    </section>
+
+    <!-- Task 2 -->
+    <section class="section-block bg-white" id="task2">
+      <div class="container text-center">
+        <h2 class="section-title">2. Personal Portfolio Basics</h2>
+        <div class="bg-light text-dark rounded-4 p-4 p-md-5 mt-4">
+          <img class="img-fluid rounded-circle portfolio-photo shadow-sm mb-3" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" alt="Portfolio profile portrait">
+          <h3 class="fw-bold mt-2 mb-3">Your Name</h3>
+          <p class="lead">Computer Science Student | Aspiring Software Engineer</p>
+          <p class="text-secondary">I enjoy learning new technologies and building practical digital experiences.</p>
+          <div class="d-flex justify-content-center flex-wrap gap-2 portfolio-actions mb-4">
+            <a href="#task6" class="btn btn-primary">Hire Me</a>
+            <a href="#contact" class="btn btn-outline-primary">Download CV</a>
+          </div>
+          <form class="row g-3 text-start mx-auto" style="max-width:650px" action="#contact" method="get">
+            <div class="col-md-6"><label class="form-label" for="portfolioName">Name</label><input class="form-control" id="portfolioName" type="text" placeholder="Enter your name"></div>
+            <div class="col-md-6"><label class="form-label" for="portfolioEmail">Email</label><input class="form-control" id="portfolioEmail" type="email" placeholder="name@example.com"></div>
+            <div class="col-12"><label class="form-label" for="portfolioMessage">Message</label><textarea class="form-control" id="portfolioMessage" rows="3" placeholder="Write your message"></textarea></div>
+            <div class="col-12 text-center"><button class="btn btn-dark" type="submit">Send Message</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 3 -->
+    <section class="section-block" id="task3">
+      <div class="container">
+        <h2 class="section-title">3. Product Catalog</h2>
+        <p class="text-secondary">Bootstrap grid: 1 column on small screens, 2 on medium, and 4 on large screens.</p>
+        <div class="row g-4">
+          <div class="col-12 col-sm-6 col-lg-3"><article class="card h-100 shadow-sm demo-card"><img class="card-img-top product-photo" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Wrist watch"><div class="card-body d-flex flex-column"><h3 class="h5 card-title">Classic Watch</h3><p class="fw-bold text-primary">₹1,499</p><button class="btn btn-primary mt-auto" type="button">Add to Cart</button></div></article></div>
+          <div class="col-12 col-sm-6 col-lg-3"><article class="card h-100 shadow-sm demo-card"><img class="card-img-top product-photo" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="Headphones"><div class="card-body d-flex flex-column"><h3 class="h5 card-title">Wireless Headphones</h3><p class="fw-bold text-primary">₹2,299</p><button class="btn btn-primary mt-auto" type="button">Add to Cart</button></div></article></div>
+          <div class="col-12 col-sm-6 col-lg-3"><article class="card h-100 shadow-sm demo-card"><img class="card-img-top product-photo" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Camera"><div class="card-body d-flex flex-column"><h3 class="h5 card-title">Instant Camera</h3><p class="fw-bold text-primary">₹4,799</p><button class="btn btn-primary mt-auto" type="button">Add to Cart</button></div></article></div>
+          <div class="col-12 col-sm-6 col-lg-3"><article class="card h-100 shadow-sm demo-card"><img class="card-img-top product-photo" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Red sneaker"><div class="card-body d-flex flex-column"><h3 class="h5 card-title">Sport Sneakers</h3><p class="fw-bold text-primary">₹2,999</p><button class="btn btn-primary mt-auto" type="button">Add to Cart</button></div></article></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 4 -->
+    <section class="section-block bg-white" id="task4">
+      <div class="container">
+        <h2 class="section-title text-center">4. Restaurant Menu Page</h2>
+        <p class="lead text-center">Today's Menu</p>
+        <div class="row g-4 align-items-start">
+          <div class="col-lg-7">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark"><tr><th scope="col">Menu Item</th><th scope="col">Category</th><th scope="col" class="text-end">Price</th></tr></thead>
+                <tbody>
+                  <tr><td>Tomato Basil Soup</td><td>Starter</td><td class="text-end">₹149</td></tr>
+                  <tr><td>Paneer Tikka</td><td>Starter</td><td class="text-end">₹249</td></tr>
+                  <tr><td>Veg Biryani</td><td>Main Course</td><td class="text-end">₹299</td></tr>
+                  <tr><td>Dal Makhani</td><td>Main Course</td><td class="text-end">₹279</td></tr>
+                  <tr><td>Gulab Jamun</td><td>Dessert</td><td class="text-end">₹99</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3 class="h5 mt-4">Chef's Specials</h3>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">Special Paneer Thali <span class="badge text-bg-success rounded-pill">Popular</span></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">Tandoori Platter <span class="badge text-bg-warning">Chef's Pick</span></li>
+              <li class="list-group-item">Seasonal Fruit Dessert</li>
+            </ul>
+          </div>
+          <div class="col-lg-5">
+            <figure class="mb-0"><img class="img-fluid menu-photo" src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" alt="Freshly prepared meal"><figcaption class="text-center text-secondary mt-2">Freshly prepared with seasonal ingredients.</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 5 -->
+    <section class="section-block blog-theme" id="task5">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+          <div><p class="text-uppercase small fw-semibold mb-1">The Sunday Edit</p><h2 class="section-title mb-0">5. Custom Themed Blog</h2></div>
+          <a href="#task5" class="btn btn-primary">Explore Articles</a>
+        </div>
+        <p class="lead">Ideas for thoughtful living, learning, and creative work.</p>
+        <div class="row g-4">
+          <div class="col-md-6"><article class="card h-100 shadow-sm demo-card"><img class="card-img-top product-photo" src="https://images.unsplash.com/photo-1455390582262-044c80f7a0b7?auto=format&fit=crop&w=900&q=80" alt="Notebook and writing tools"><div class="card-body"><span class="badge text-bg-warning mb-2">Productivity</span><h3 class="h4 card-title">Small Habits, Big Progress</h3><p class="card-text">Simple routines can help you stay consistent and make meaningful progress over time.</p><a href="#task5" class="btn btn-primary">Read Article</a></div></article></div>
+          <div class="col-md-6"><article class="card h-100 shadow-sm demo-card"><img class="card-img-top product-photo" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Laptop on a desk"><div class="card-body"><span class="badge text-bg-warning mb-2">Technology</span><h3 class="h4 card-title">Learning to Build for the Web</h3><p class="card-text">Explore the building blocks behind modern, accessible, responsive websites.</p><a href="#task5" class="btn btn-primary">Read Article</a></div></article></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 6 -->
+    <section class="section-block" id="task6">
+      <div class="container">
+        <h2 class="section-title">6. Notifications Dashboard — Alerts & Wells</h2>
+        <div class="card shadow-sm">
+          <div class="card-header fw-bold">Notification Center</div>
+          <div class="card-body">
+            <div class="alert alert-success" role="alert"><strong>New message:</strong> Your profile was updated successfully.</div>
+            <div class="alert alert-info" role="alert"><strong>Helpful tip:</strong> Add a profile photo to personalize your account.</div>
+            <div class="alert alert-danger" role="alert"><strong>Warning:</strong> Please verify your email address.</div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Reminder:</strong> Your weekly summary is ready to review.
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="summary-well mt-3"><h3 class="h5">Summary Well</h3><p class="mb-0">3 notifications · 1 reminder · Last updated just now</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 7 -->
+    <section class="section-block bg-white" id="task7">
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
+          <h2 class="section-title mb-0">7. Task Tracker with Badges</h2>
+          <span class="badge text-bg-primary fs-6">Pending <span class="badge text-bg-light text-dark">3</span></span>
+        </div>
+        <div class="list-group shadow-sm">
+          <div class="list-group-item d-flex justify-content-between align-items-center gap-3 flex-wrap"><div><strong>Finish Bootstrap assignment</strong><div class="small text-secondary">Due today</div></div><span class="badge text-bg-danger rounded-pill">High</span></div>
+          <div class="list-group-item d-flex justify-content-between align-items-center gap-3 flex-wrap"><div><strong>Review class notes</strong><div class="small text-secondary">Due tomorrow</div></div><span class="badge text-bg-warning rounded-pill">Medium</span></div>
+          <div class="list-group-item d-flex justify-content-between align-items-center gap-3 flex-wrap"><div><strong>Organize project folder</strong><div class="small text-secondary">This week</div></div><span class="badge text-bg-success rounded-pill">Low</span></div>
+        </div>
+        <button type="button" class="btn btn-success mt-3">Completed <span class="badge text-bg-light text-dark ms-1">2</span></button>
+      </div>
+    </section>
+
+    <!-- Task 8 -->
+    <section class="section-block" id="task8">
+      <div class="container">
+        <h2 class="section-title text-center">8. Pricing Plans</h2>
+        <p class="text-center text-secondary mb-4">Choose the plan that works for you.</p>
+        <div class="row g-4 align-items-stretch">
+          <div class="col-md-4"><div class="card pricing-card shadow-sm"><div class="card-body p-4 text-center"><h3 class="h4">Starter</h3><p class="display-6 fw-bold">₹0<span class="fs-6 fw-normal text-secondary">/month</span></p><ul class="list-unstyled my-4"><li class="py-2">✓ 1 project</li><li class="py-2">✓ Basic support</li><li class="py-2">✓ Community access</li></ul><a href="#task8" class="btn btn-outline-primary w-100">Choose Starter</a></div></div></div>
+          <div class="col-md-4"><div class="card pricing-card bg-primary text-white shadow-lg border-primary"><div class="card-body p-4 text-center"><span class="badge text-bg-light text-primary mb-2">Most Popular</span><h3 class="h4">Pro</h3><p class="display-6 fw-bold">₹799<span class="fs-6 fw-normal">/month</span></p><ul class="list-unstyled my-4"><li class="py-2">✓ Unlimited projects</li><li class="py-2">✓ Priority support</li><li class="py-2">✓ Advanced analytics</li></ul><a href="#task8" class="btn btn-light text-primary w-100">Choose Pro</a></div></div></div>
+          <div class="col-md-4"><div class="card pricing-card shadow-sm"><div class="card-body p-4 text-center"><h3 class="h4">Business</h3><p class="display-6 fw-bold">₹1,999<span class="fs-6 fw-normal text-secondary">/month</span></p><ul class="list-unstyled my-4"><li class="py-2">✓ Team workspace</li><li class="py-2">✓ Dedicated support</li><li class="py-2">✓ Custom reports</li></ul><a href="#task8" class="btn btn-outline-primary w-100">Choose Business</a></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Task 9 -->
+    <section class="section-block bg-white" id="task9">
+      <div class="container">
+        <h2 class="section-title">9. Blog Pagination & Pager</h2>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6"><article class="card h-100"><div class="card-body"><h3 class="h5">How to Learn Consistently</h3><p class="card-text">A few practical ways to create a steady learning habit.</p></div></article></div>
+          <div class="col-md-6"><article class="card h-100"><div class="card-body"><h3 class="h5">Why Responsive Design Matters</h3><p class="card-text">A quick look at layouts that adapt to different devices.</p></div></article></div>
+        </div>
+        <nav aria-label="Blog pages"><ul class="pagination justify-content-center flex-wrap"><li class="page-item disabled"><a class="page-link" href="#task9" tabindex="-1" aria-disabled="true">Previous</a></li><li class="page-item active" aria-current="page"><a class="page-link" href="#task9">1</a></li><li class="page-item"><a class="page-link" href="#task9">2</a></li><li class="page-item"><a class="page-link" href="#task9">Next</a></li></ul></nav>
+        <div class="d-flex justify-content-between gap-3 flex-wrap mt-4"><a class="btn btn-outline-secondary" href="#task9">← Older Posts</a><a class="btn btn-outline-secondary" href="#task9">Newer Posts →</a></div>
+      </div>
+    </section>
+
+    <!-- Task 10 -->
+    <section class="section-block" id="task10">
+      <div class="container">
+        <h2 class="section-title">10. Travel Agency Showcase</h2>
+        <p class="text-secondary">A Bootstrap carousel with three destinations and an animated booking progress bar.</p>
+        <div id="travelCarousel" class="carousel slide carousel-fade rounded-4 overflow-hidden shadow" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active travel-slide" data-bs-interval="3000"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=85" class="d-block w-100" alt="Mountain lake destination"><div class="carousel-caption d-block"><h3 class="display-6 fw-bold">Explore the Mountains</h3><p>Fresh air, scenic trails, and peaceful views.</p></div></div>
+            <div class="carousel-item travel-slide" data-bs-interval="4500"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=85" class="d-block w-100" alt="Tropical beach destination"><div class="carousel-caption d-block"><h3 class="display-6 fw-bold">Relax by the Sea</h3><p>Discover bright beaches and blue waters.</p></div></div>
+            <div class="carousel-item travel-slide" data-bs-interval="3500"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=85" class="d-block w-100" alt="Colorful coastal Italian village"><div class="carousel-caption d-block"><h3 class="display-6 fw-bold">Discover Colorful Cities</h3><p>Find local culture, food, and unforgettable streets.</p></div></div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#travelCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+          <button class="carousel-control-next" type="button" data-bs-target="#travelCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+        </div>
+        <div class="mt-4 p-4 bg-white rounded-4 shadow-sm">
+          <div class="d-flex justify-content-between mb-2"><strong>Booking completion</strong><strong>70%</strong></div>
+          <div class="progress" role="progressbar" aria-label="Booking completion" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height:1.2rem"><div class="progress-bar progress-bar-striped progress-bar-animated" style="width:70%">70%</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="py-4 mt-3">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div><strong>Bootstrap Lab</strong><div class="small">Practical assignment demonstration</div></div>
+      <div class="small">Contact: student@example.com · +91 98765 43210</div>
+      <a href="#home" class="link-light">Back to top ↑</a>
+    </div>
+  </footer>
+  <!-- Bootstrap JavaScript bundle enables the responsive navbar, dismissible alert, and carousel. -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
