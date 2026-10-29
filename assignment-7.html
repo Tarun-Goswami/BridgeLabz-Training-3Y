@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Practical Assignment - 10 Tasks</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --primary: #2563eb;
+      --dark: #172033;
+      --muted: #64748b;
+      --light: #f1f5f9;
+      --border: #dbe3ef;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--dark);
+      background: #f8fafc;
+      line-height: 1.6;
+    }
+    header.site-header {
+      background: #172554;
+      color: white;
+      padding: 24px 16px;
+      text-align: center;
+    }
+    header.site-header h1 { margin: 0 0 6px; }
+    header.site-header p { margin: 0; color: #dbeafe; }
+    main { width: min(1150px, 94%); margin: 28px auto; }
+    .task {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
+    }
+    .task h2 { margin-top: 0; color: #1d4ed8; }
+    .muted { color: var(--muted); }
+    .demo-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px; }
+    .demo-item { min-width: 145px; text-align: center; padding: 14px; border-radius: 10px; background: #f8fafc; }
+    a { color: #1d4ed8; }
+    .demo-link { display: inline-block; padding: 8px 12px; border-radius: 7px; background: #dbeafe; text-decoration: none; }
+    .demo-link:hover { color: white; background: #1d4ed8; }
+    .demo-link:active { background: #172554; transform: scale(.96); }
+    .demo-button, button {
+      border: 0; border-radius: 9px; padding: 11px 17px; cursor: pointer;
+      background: var(--primary); color: white; font-weight: 700;
+      transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+    .demo-button:hover, button:hover { background: #1e40af; }
+    .demo-button:focus, button:focus { outline: 3px solid #93c5fd; outline-offset: 3px; }
+    .demo-button:active, button:active { transform: scale(.96); }
+    .pseudo-list { display: flex; gap: 12px; list-style: none; padding: 0; margin: 0; }
+    .pseudo-list li { padding: 10px 14px; border-radius: 8px; background: #e2e8f0; }
+    .pseudo-list li:nth-child(odd) { background: #bfdbfe; }
+    .pseudo-list li:hover { background: #fde68a; }
+    /* Task 2: CSS-only tooltips use an absolutely positioned label and opacity transition. */
+    .tooltip-wrap { position: relative; display: inline-block; padding: 14px 18px; border-radius: 10px; background: #e0f2fe; cursor: help; font-weight: 700; }
+    .tooltip-text { position: absolute; z-index: 2; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: max-content; max-width: 220px; white-space: normal; padding: 8px 11px; border-radius: 7px; background: #0f172a; color: white; font-size: 13px; font-weight: 400; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out; pointer-events: none; }
+    .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #0f172a; }
+    .tooltip-wrap:hover .tooltip-text, .tooltip-wrap:focus .tooltip-text { opacity: 1; visibility: visible; }
+    /* Task 3: Responsive image grid with overlay and scale effect. */
+    .image-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .showcase-figure { position: relative; overflow: hidden; margin: 0; border-radius: 13px; box-shadow: 0 7px 18px rgba(15, 23, 42, .15); background: #e2e8f0; }
+    .showcase-figure .image-frame { position: relative; overflow: hidden; }
+    .showcase-figure img { display: block; width: 100%; height: 190px; object-fit: cover; transition: transform .3s ease; }
+    .showcase-figure .image-frame::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0); transition: background .3s ease; }
+    .showcase-figure:hover img { transform: scale(1.1); }
+    .showcase-figure:hover .image-frame::after { background: rgba(0, 0, 0, .25); }
+    figcaption { padding: 10px 12px; text-align: center; font-weight: 700; background: white; }
+    /* Task 4: selector examples are commented beside their purpose. */
+    .selector-demo p { margin: 8px 0; padding: 8px 10px; border-radius: 6px; }
+    .selector-demo p { background: #f1f5f9; } /* Element selector: styles every paragraph in this demo. */
+    .selector-demo .special { color: #7c3aed; font-weight: 700; } /* Class selector: styles elements with class="special". */
+    .selector-demo #unique-note { border-left: 4px solid #f59e0b; } /* ID selector: targets one unique element. */
+    .selector-demo a[href^="https"] { color: #047857; font-weight: 700; } /* Attribute selector: targets secure links. */
+    .selector-demo > p { border: 1px dashed #94a3b8; } /* > child combinator: direct child paragraphs only. */
+    .selector-demo h3 + p { background: #fef3c7; } /* + adjacent sibling: first paragraph immediately after h3. */
+    .selector-demo h3 ~ p { padding-left: 16px; } /* ~ general sibling: all following sibling paragraphs. */
+    .selector-demo ul li { color: #334155; } /* Descendant selector: all li elements inside ul. */
+    .button-collection { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+    .btn-primary { background: #2563eb; box-shadow: 0 5px 12px #2563eb33; }
+    .btn-secondary { background: #475569; }
+    .btn-outline { color: #2563eb; background: white; border: 2px solid #2563eb; }
+    .btn-outline:hover { color: white; }
+    .button-collection button:disabled { color: #64748b; background: #cbd5e1; cursor: not-allowed; box-shadow: none; }
+    /* Task 6: animations use keyframes and deliberately different timing settings. */
+    .animation-stage { min-height: 230px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 38px; overflow: hidden; background: #f8fafc; border-radius: 12px; padding: 25px; }
+    .moving-box { width: 58px; height: 58px; border-radius: 12px; background: #3b82f6; animation: moveSide 2.4s ease-in-out infinite alternate; }
+    .bouncing-ball { width: 48px; height: 48px; border-radius: 50%; background: #f97316; animation: bounce 1.1s ease-in-out infinite; }
+    .color-text { font-size: 22px; font-weight: 800; animation: colorChange 3s ease-in-out 0.4s infinite alternate; }
+    @keyframes moveSide { from { transform: translateX(-25px) rotate(0); } to { transform: translateX(25px) rotate(180deg); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-48px); } }
+    @keyframes colorChange { 0% { color: #2563eb; } 50% { color: #9333ea; } 100% { color: #db2777; } }
+    .ui-gradient { background: linear-gradient(135deg, #eff6ff, #f5f3ff, #ecfeff); }
+    .ui-card { max-width: 720px; margin: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; padding: 24px; border-radius: 14px; background: white; box-shadow: 0 10px 28px #0f172a14; }
+    input, select, textarea { font: inherit; padding: 11px 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; min-width: 150px; }
+    input:focus, select:focus, textarea:focus { outline: 3px solid #bfdbfe; border-color: #2563eb; }
+    .search-input { flex: 1 1 220px; }
+    .box-comparison { display: flex; justify-content: center; align-items: stretch; gap: 24px; flex-wrap: wrap; }
+    .box-demo { width: 280px; padding: 22px; min-height: 150px; border: 12px solid #1d4ed8; background: #dbeafe; }
+    .content-box { box-sizing: content-box; background: #fee2e2; border-color: #dc2626; }
+    .border-box { box-sizing: border-box; background: #dcfce7; border-color: #15803d; }
+    .effect-cards { display: flex; flex-wrap: wrap; justify-content: space-evenly; gap: 18px; }
+    .effect-card { width: 190px; padding: 22px 15px; text-align: center; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; transition: transform .3s ease, background .3s ease, box-shadow .3s ease; }
+    .effect-card:hover { transform: translateY(-7px) scale(1.04); background: #dbeafe; box-shadow: 0 12px 24px #1d4ed833; }
+    .effect-card:active { transform: scale(.97); }
+    .mini-layout { max-width: 850px; margin: auto; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 12px 28px #0f172a14; }
+    .mini-header, .mini-footer { padding: 16px 22px; color: white; background: #172554; }
+    .mini-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .mini-header h3 { margin: 0; }
+    .mini-nav { display: flex; gap: 12px; }
+    .mini-nav a { color: white; text-decoration: none; padding: 5px 8px; border-radius: 6px; }
+    .mini-nav a:hover { background: #1d4ed8; }
+    .mini-content { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 24px; padding: 26px; }
+    .mini-content img { width: 190px; max-width: 100%; height: 150px; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 14px #0f172a26; }
+    .mini-form { display: flex; flex-direction: column; gap: 12px; width: min(100%, 350px); }
+    .mini-form input { width: 100%; }
+    .mini-footer { text-align: center; }
+    footer.page-footer { text-align: center; padding: 24px 12px; color: #64748b; }
+    @media (max-width: 700px) {
+      .image-grid { grid-template-columns: 1fr; }
+      .showcase-figure img { height: 230px; }
+      .task { padding: 18px; }
+      .box-demo { width: min(100%, 280px); }
+      .mini-nav { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <h1>CSS Practical Assignment</h1>
+    <p>All 10 tasks in one HTML file with embedded CSS</p>
+  </header>
+
+  <main>
+    <section class="task" id="task1">
+      <h2>1. Webpage Demonstrating Pseudo-Classes</h2>
+      <p class="muted">Hover, focus, active, and nth-child selectors create different visual states.</p>
+      <div class="demo-row">
+        <div class="demo-item"><a class="demo-link" href="#task1">Hover link</a><p><strong>:hover</strong><br>Changes link color and background when the pointer is over it.</p></div>
+        <div class="demo-item"><button class="demo-button">Focus / Click</button><p><strong>:focus / :active</strong><br>Focus adds an outline; clicking briefly shrinks the button.</p></div>
+        <div class="demo-item"><ul class="pseudo-list"><li>One</li><li>Two</li><li>Three</li></ul><p><strong>:nth-child(odd)</strong><br>Colors odd-numbered list items differently.</p></div>
+      </div>
+    </section>
+
+    <section class="task" id="task2">
+      <h2>2. Tooltip Demonstration Page</h2>
+      <p class="muted">Hover over or focus each item to reveal its CSS-only tooltip.</p>
+      <div class="demo-row">
+        <span class="tooltip-wrap" tabindex="0">ⓘ Information<span class="tooltip-text">This tooltip explains the information icon.</span></span>
+        <span class="tooltip-wrap" tabindex="0">HTML<span class="tooltip-text">HTML structures the content of a webpage.</span></span>
+        <span class="tooltip-wrap" tabindex="0">CSS<span class="tooltip-text">CSS styles and lays out webpage elements.</span></span>
+        <span class="tooltip-wrap" tabindex="0">Flexbox<span class="tooltip-text">Flexbox aligns items along a row or column.</span></span>
+      </div>
+    </section>
+
+    <section class="task" id="task3">
+      <h2>3. Image Showcase Layout</h2>
+      <p class="muted">Hover over an image to scale it and reveal a dark overlay. The layout becomes one column below 700px.</p>
+      <div class="image-grid">
+        <figure class="showcase-figure"><div class="image-frame"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Mountain landscape"></div><figcaption>Mountain View</figcaption></figure>
+        <figure class="showcase-figure"><div class="image-frame"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80" alt="Lake and mountains"></div><figcaption>Peaceful Lake</figcaption></figure>
+        <figure class="showcase-figure"><div class="image-frame"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80" alt="Sunlight in a forest"></div><figcaption>Green Forest</figcaption></figure>
+        <figure class="showcase-figure"><div class="image-frame"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80" alt="Ocean waves"></div><figcaption>Ocean Waves</figcaption></figure>
+        <figure class="showcase-figure"><div class="image-frame"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Mountain lake"></div><figcaption>Alpine Lake</figcaption></figure>
+        <figure class="showcase-figure"><div class="image-frame"><img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80" alt="Wild deer in nature"></div><figcaption>Wildlife</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="task" id="task4">
+      <h2>4. CSS Selectors Practice Page</h2>
+      <div class="selector-demo">
+        <p>This paragraph demonstrates an element selector.</p>
+        <p class="special">This paragraph uses the special class selector.</p>
+        <p id="unique-note">This paragraph is targeted by a unique ID selector.</p>
+        <h3>Combinator examples</h3>
+        <p>This paragraph immediately follows the heading and matches h3 + p.</p>
+        <p>This is another following sibling and matches h3 ~ p.</p>
+        <p>Visit <a href="https://example.com">this secure example link</a> to see an attribute selector.</p>
+        <ul><li>First list item</li><li>Second list item</li></ul>
+        <div><p>This paragraph is a descendant inside a div.</p></div>
+      </div>
+      <p class="muted">The CSS comments describe the element, class, ID, attribute, child, adjacent sibling, general sibling, and descendant selectors used above.</p>
+    </section>
+
+    <section class="task" id="task5">
+      <h2>5. Styled Button Collection</h2>
+      <p class="muted">Use Tab to test the focus outline. Hover and click to see transitions. The last button is disabled.</p>
+      <div class="button-collection">
+        <button class="btn-primary">Primary</button>
+        <button class="btn-secondary">Secondary</button>
+        <button class="btn-outline">Outline</button>
+        <button disabled>Disabled</button>
+      </div>
+    </section>
+
+    <section class="task" id="task6">
+      <h2>6. CSS Animation Demonstration Page</h2>
+      <p class="muted">These animations use @keyframes, ease-in-out timing, delays, iteration counts, and alternate direction.</p>
+      <div class="animation-stage">
+        <div><div class="moving-box" aria-label="Moving rotating box"></div><p>Moving box</p></div>
+        <div><div class="bouncing-ball" aria-label="Bouncing ball"></div><p>Bouncing ball</p></div>
+        <div class="color-text">Color changing text</div>
+      </div>
+    </section>
+
+    <section class="task ui-gradient" id="task7">
+      <h2>7. User Interface Components Page</h2>
+      <p class="muted">Search field, dropdown, and buttons in a flexible card with focus and hover styles.</p>
+      <div class="ui-card">
+        <input class="search-input" type="search" placeholder="Search here..." aria-label="Search">
+        <select aria-label="Choose category"><option>Choose category</option><option>HTML</option><option>CSS</option><option>JavaScript</option></select>
+        <button type="button">Search</button>
+        <button type="button" class="btn-secondary">Cancel</button>
+      </div>
+    </section>
+
+    <section class="task" id="task8">
+      <h2>8. Box-Sizing Comparison Page</h2>
+      <p class="muted">Both boxes use width: 280px, padding: 22px, and a 12px border. The visible total size differs because of box-sizing.</p>
+      <div class="box-comparison">
+        <div class="box-demo content-box"><h3>content-box</h3><p>Width is applied to the content only. Padding and borders are added outside the 280px width.</p></div>
+        <div class="box-demo border-box"><h3>border-box</h3><p>Width includes content, padding, and borders, so the total outer width stays 280px.</p></div>
+      </div>
+    </section>
+
+    <section class="task" id="task9">
+      <h2>9. Combined Effects Demonstration Page</h2>
+      <p class="muted">Hover or click each card to see pseudo-classes, transitions, transformations, and shadows working together.</p>
+      <div class="effect-cards">
+        <button class="effect-card" type="button">Grow on Hover</button>
+        <button class="effect-card" type="button">Lift and Shadow</button>
+        <button class="effect-card" type="button">Click to Press</button>
+        <button class="effect-card" type="button">Smooth Color</button>
+      </div>
+    </section>
+
+    <section class="task" id="task10">
+      <h2>10. Complete Mini User Interface Layout</h2>
+      <div class="mini-layout">
+        <header class="mini-header"><h3>My Mini Website</h3><nav class="mini-nav"><a href="#task10">Home</a><a href="#task7">Components</a><a href="#task1">Examples</a></nav></header>
+        <div class="mini-content">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Laptop on a desk">
+          <form class="mini-form" action="#" method="get">
+            <h3 style="margin:0">Contact Us</h3>
+            <label for="name">Your name</label>
+            <input id="name" type="text" placeholder="Enter your name" required>
+            <label for="email">Email address</label>
+            <input id="email" type="email" placeholder="Enter your email" required>
+            <label for="message">Message</label>
+            <textarea id="message" rows="3" placeholder="Write a short message"></textarea>
+            <div class="button-collection" style="justify-content:flex-start"><button type="submit">Submit</button><button type="reset" class="btn-secondary">Reset</button></div>
+          </form>
+        </div>
+        <footer class="mini-footer">© 2026 My Mini Website | Built with HTML and CSS</footer>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer">CSS Practical Assignment — 10 demonstrations in one file.</footer>
+</body>
+</html>
