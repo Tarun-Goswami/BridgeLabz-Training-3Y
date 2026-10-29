@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive CSS Assignment - 10 Tasks</title>
+<style>
+  * { box-sizing: border-box; }
+  :root { --ink:#172033; --blue:#2563eb; --pale:#eff6ff; --line:#dbe3ef; }
+  body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--ink); background:#f8fafc; line-height:1.6; }
+  a { color:inherit; }
+  .top-header { background:#172554; color:white; padding:22px 5%; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+  .top-header h1 { margin:0; font-size:clamp(1.3rem,3vw,2rem); }
+  .top-header nav { display:flex; flex-wrap:wrap; gap:16px; }
+  .top-header nav a { text-decoration:none; padding:6px 9px; border-radius:6px; }
+  .top-header nav a:hover { background:#2563eb; }
+  main { width:min(1180px,94%); margin:28px auto; }
+  .task { margin:24px 0; padding:24px; background:white; border:1px solid var(--line); border-radius:16px; box-shadow:0 6px 18px #0f172a0b; animation:fadeIn .65s ease both; }
+  .task h2 { margin:0 0 10px; color:#1d4ed8; }
+  .intro { margin-top:0; color:#64748b; }
+  .image-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; }
+  .image-card { margin:0; overflow:hidden; border-radius:12px; background:#f1f5f9; box-shadow:0 5px 15px #0f172a16; }
+  .image-card img { display:block; width:100%; height:180px; object-fit:cover; transition:filter .45s ease, transform .45s ease; }
+  .image-card figcaption { padding:10px; text-align:center; font-weight:700; }
+  .blur img { filter:blur(2px); } .gray img { filter:grayscale(100%); } .sepia img { filter:sepia(100%); }
+  .bright img { filter:brightness(1.45); } .contrast img { filter:contrast(1.7); } .hue img { filter:hue-rotate(120deg); }
+  .image-card:hover img { filter:none; transform:scale(1.04); }
+  .home-features { display:flex; gap:18px; }
+  .feature { flex:1; padding:24px; border-radius:12px; background:#dbeafe; text-align:center; transition:transform .25s ease,box-shadow .25s ease; }
+  .feature:hover { transform:scale(1.04); box-shadow:0 9px 20px #2563eb25; }
+  .page-footer { text-align:center; padding:22px; background:#172554; color:white; }
+  .cards-row { display:flex; flex-wrap:wrap; gap:18px; }
+  .responsive-card { flex:1 1 calc(25% - 18px); min-width:0; padding:22px; background:#e0f2fe; border-radius:12px; transition:background .25s ease,transform .25s ease; }
+  .responsive-card:hover { background:#bfdbfe; transform:translateY(-4px); }
+  .type-demo { padding:28px; text-align:center; background:linear-gradient(135deg,#eff6ff,#f5f3ff); border-radius:12px; }
+  .type-demo h1 { font-size:clamp(1.5rem,4vw,3rem); line-height:1.2; margin:0 auto 16px; }
+  .type-demo p { font-size:clamp(1rem,2vw,1.5rem); max-width:850px; margin:0 auto; }
+  .profile-row { display:flex; justify-content:center; gap:20px; }
+  .profile-card { flex:1; max-width:330px; overflow:hidden; border-radius:14px; background:#f8fafc; box-shadow:0 6px 18px #0f172a12; animation:fadeIn .8s ease both; transition:transform .3s ease,box-shadow .3s ease; }
+  .profile-card:nth-child(2) { animation-delay:.15s; } .profile-card:nth-child(3) { animation-delay:.3s; }
+  .profile-card:hover { transform:translateY(-10px); box-shadow:0 14px 25px #0f172a20; }
+  .profile-card img { width:100%; height:190px; object-fit:cover; display:block; filter:grayscale(80%); transition:filter .4s ease; }
+  .profile-card:nth-child(2) img { filter:sepia(80%); } .profile-card:nth-child(3) img { filter:saturate(45%); }
+  .profile-card:hover img { filter:none; }
+  .profile-card div { padding:16px; }
+  .cheat-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+  .cheat-box { padding:18px; background:#f1f5f9; border:1px solid var(--line); border-radius:11px; transition:transform .25s ease,background .25s ease; }
+  .cheat-box:hover { transform:translateY(-4px); background:#dbeafe; }
+  .cheat-box h3 { margin-top:0; color:#1d4ed8; }
+  code { display:block; white-space:pre-wrap; overflow-wrap:anywhere; padding:9px; margin-top:8px; background:#e2e8f0; border-radius:7px; font-size:.9rem; }
+  .combined-grid { display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:18px; align-items:stretch; }
+  .combined-grid > div { padding:18px; background:#f1f5f9; border-radius:12px; }
+  .combined-grid img { width:100%; height:150px; object-fit:cover; border-radius:8px; transition:transform .3s ease; }
+  .combined-grid img:hover { transform:scale(1.04); }
+  .comparison { display:flex; gap:22px; align-items:flex-start; }
+  .comparison figure { flex:1; margin:0; }
+  .comparison img { width:100%; height:250px; object-fit:cover; border-radius:12px; transition:filter .45s ease; }
+  .comparison .filtered img { filter:brightness(.55) contrast(1.2); }
+  .comparison .filtered img:hover { filter:none; }
+  .comparison figcaption { text-align:center; padding:10px; font-weight:700; }
+  .principles-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+  .principle { padding:22px; border-radius:12px; background:#eff6ff; transition:background .3s ease,color .3s ease,transform .3s ease; }
+  .principle:hover { background:linear-gradient(135deg,#2563eb,#7c3aed); color:white; transform:translateY(-5px); }
+  .principle:hover code { color:#172033; }
+  .dashboard { display:grid; grid-template-columns:220px minmax(0,1fr); gap:18px; }
+  .sidebar { padding:20px; border-radius:12px; background:#172554; color:white; }
+  .sidebar h3 { margin-top:0; }
+  .sidebar a { display:block; color:white; text-decoration:none; padding:8px; border-radius:6px; }
+  .sidebar a:hover { background:#2563eb; }
+  .dashboard-main { min-width:0; }
+  .dashboard-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  .dashboard-card { padding:20px; border:1px solid var(--line); border-radius:12px; background:#f8fafc; animation:fadeIn .7s ease both; transition:transform .25s ease,box-shadow .25s ease; }
+  .dashboard-card:hover { transform:scale(1.03); box-shadow:0 10px 22px #0f172a1c; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  @media (max-width:900px) {
+    .responsive-card { flex-basis:calc(50% - 18px); }
+    .cheat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .combined-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width:800px) {
+    .profile-row { flex-direction:column; align-items:center; }
+    .profile-card { width:100%; }
+  }
+  @media (max-width:750px) {
+    .home-features { flex-direction:column; }
+    .dashboard { grid-template-columns:1fr; }
+    .sidebar { order:0; }
+    .dashboard-main { order:1; }
+  }
+  @media (max-width:700px) {
+    .type-demo { padding:20px 14px; }
+    .type-demo h1 { margin-bottom:12px; }
+    .type-demo p { line-height:1.8; }
+    .cheat-grid { grid-template-columns:1fr; }
+    .combined-grid { grid-template-columns:1fr; }
+    .comparison { flex-direction:column; }
+    .comparison figure { width:100%; }
+    .principles-grid { grid-template-columns:1fr; }
+    .task { padding:18px; }
+  }
+  @media (max-width:600px) {
+    .image-grid { grid-template-columns:1fr; }
+    .responsive-card { flex-basis:100%; }
+    .dashboard-cards { grid-template-columns:1fr; }
+    .top-header { align-items:flex-start; }
+    .top-header nav { gap:6px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  }
+</style>
+</head>
+<body>
+<header class="top-header">
+  <h1>Responsive CSS Lab</h1>
+  <nav aria-label="Main navigation">
+    <a href="#task1">Gallery</a><a href="#task2">Layout</a><a href="#task6">Cheat Sheet</a><a href="#task10">Dashboard</a>
+  </nav>
+</header>
+<main>
+  <section class="task" id="task1">
+    <h2>Q1. Responsive Image Filter Gallery</h2>
+    <p class="intro">Each image has a different CSS filter. Hover to remove the filter. Grid uses auto-fit and a minimum width of 200px.</p>
+    <div class="image-grid">
+      <figure class="image-card blur"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Mountain landscape"><figcaption>Blur</figcaption></figure>
+      <figure class="image-card gray"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80" alt="Lake in the mountains"><figcaption>Grayscale</figcaption></figure>
+      <figure class="image-card sepia"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80" alt="Forest trees"><figcaption>Sepia</figcaption></figure>
+      <figure class="image-card bright"><img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80" alt="Ocean waves"><figcaption>Brightness</figcaption></figure>
+      <figure class="image-card contrast"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Alpine lake"><figcaption>Contrast</figcaption></figure>
+      <figure class="image-card hue"><img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80" alt="Wildlife in nature"><figcaption>Hue Rotate</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="task" id="task2">
+    <h2>Q2. Responsive Web Design Layout</h2>
+    <p class="intro">A Flexbox homepage with logo, navigation, three feature boxes, and a footer. Features stack below 750px.</p>
+    <div class="home-features">
+      <div class="feature"><h3>Fast</h3><p>Clean and efficient layout.</p></div>
+      <div class="feature"><h3>Flexible</h3><p>Adapts to different screen sizes.</p></div>
+      <div class="feature"><h3>Accessible</h3><p>Simple, readable content.</p></div>
+    </div>
+    <p style="text-align:center;margin-bottom:0;color:#64748b">Feature section footer preview — centered content</p>
+  </section>
+
+  <section class="task" id="task3">
+    <h2>Q3. Responsive Cards with Media Queries</h2>
+    <p class="intro">Desktop: four cards. Tablet (max 900px): two columns. Mobile (max 600px): one column.</p>
+    <div class="cards-row">
+      <article class="responsive-card"><h3>Card One</h3><p>Flexible content with equal spacing.</p></article>
+      <article class="responsive-card"><h3>Card Two</h3><p>Background changes on hover.</p></article>
+      <article class="responsive-card"><h3>Card Three</h3><p>Responsive width using Flexbox.</p></article>
+      <article class="responsive-card"><h3>Card Four</h3><p>Padding keeps text comfortable.</p></article>
+    </div>
+  </section>
+
+  <section class="task" id="task4">
+    <h2>Q4. Responsive Typography</h2>
+    <div class="type-demo">
+      <h1>Typography That Adapts</h1>
+      <p>This heading and paragraph use clamp() with relative units so text scales smoothly across mobile, tablet, and desktop screens while keeping readable minimum and maximum sizes.</p>
+    </div>
+  </section>
+
+  <section class="task" id="task5">
+    <h2>Q5. Filter Cards with Animation</h2>
+    <p class="intro">Cards fade in on page load. Hover over a profile to remove its image filter and lift the card.</p>
+    <div class="profile-row">
+      <article class="profile-card"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80" alt="Portrait profile one"><div><h3>Alex Morgan</h3><p>UI Designer who creates clean, user-friendly interfaces.</p></div></article>
+      <article class="profile-card"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Portrait profile two"><div><h3>Jordan Lee</h3><p>Frontend developer focused on responsive websites.</p></div></article>
+      <article class="profile-card"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80" alt="Portrait profile three"><div><h3>Sam Taylor</h3><p>Creative thinker who turns ideas into digital experiences.</p></div></article>
+    </div>
+  </section>
+
+  <section class="task" id="task6">
+    <h2>Q6. Responsive CSS Cheat Sheet</h2>
+    <p class="intro">Topics appear in a multi-column grid on larger screens and stack into rows below 700px.</p>
+    <div class="cheat-grid">
+      <article class="cheat-box"><h3>Filters</h3><p>Change how images look.</p><code>filter: grayscale(100%);</code></article>
+      <article class="cheat-box"><h3>Media Queries</h3><p>Apply styles at chosen screen widths.</p><code>@media (max-width: 700px) { ... }</code></article>
+      <article class="cheat-box"><h3>Responsive Design</h3><p>Layouts adapt to the user's screen.</p><code>width: 100%; max-width: 1100px;</code></article>
+      <article class="cheat-box"><h3>Typography</h3><p>Use fluid font sizing with limits.</p><code>font-size: clamp(1rem, 2vw, 1.5rem);</code></article>
+      <article class="cheat-box"><h3>CSS Grid</h3><p>Build rows and columns for content.</p><code>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</code></article>
+      <article class="cheat-box"><h3>Flexbox</h3><p>Align items in a row or column.</p><code>display: flex; gap: 1rem;</code></article>
+    </div>
+  </section>
+
+  <section class="task" id="task7">
+    <h2>Q7. Combined Responsive Web Demo</h2>
+    <p class="intro">This section combines a gallery, responsive design explanation, and a cheat sheet preview using Grid.</p>
+    <div class="combined-grid">
+      <div><h3>Image Gallery</h3><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Landscape gallery preview"><p>Images scale smoothly on hover.</p></div>
+      <div><h3>Responsive Design</h3><p>Responsive design uses flexible grids, media queries, relative units, and flexible images so a page works on mobile, tablet, and desktop.</p></div>
+      <div><h3>Cheat Sheet Preview</h3><p><strong>Grid:</strong> arrange content in rows and columns.</p><p><strong>Media query:</strong> apply styles based on viewport size.</p><p><a href="#task6">View full cheat sheet →</a></p></div>
+    </div>
+  </section>
+
+  <section class="task" id="task8">
+    <h2>Q8. Filter Comparison Layout</h2>
+    <p class="intro">The right image starts darker. Hover over it to smoothly remove the filter. Images stack below 700px.</p>
+    <div class="comparison">
+      <figure><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80" alt="Original mountain lake image"><figcaption>Before — Original Image</figcaption></figure>
+      <figure class="filtered"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1000&q=80" alt="Filtered mountain lake image"><figcaption>After — Filtered (hover to compare)</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="task" id="task9">
+    <h2>Q9. Responsive Design Principles Summary</h2>
+    <div class="principles-grid">
+      <article class="principle"><h3>Fluid Layouts</h3><p>Use flexible units instead of fixed page widths.</p><code>width: 90%; max-width: 1200px;</code></article>
+      <article class="principle"><h3>Flexible Media</h3><p>Make images fit their containers without overflow.</p><code>img { max-width: 100%; height: auto; }</code></article>
+      <article class="principle"><h3>Breakpoints</h3><p>Change the layout when the viewport becomes smaller.</p><code>@media (max-width: 600px) { ... }</code></article>
+    </div>
+  </section>
+
+  <section class="task" id="task10">
+    <h2>Q10. Responsive Dashboard Summary</h2>
+    <p class="intro">CSS Grid dashboard: the sidebar moves above the content below 750px; cards become a single column on mobile.</p>
+    <div class="dashboard">
+      <aside class="sidebar"><h3>Dashboard</h3><a href="#task1">Filters</a><a href="#task4">Typography</a><a href="#task3">Media Queries</a><a href="#task6">Cheat Sheet Links</a></aside>
+      <div class="dashboard-main">
+        <div class="dashboard-cards">
+          <article class="dashboard-card"><h3>Filters</h3><p>Apply blur, grayscale, sepia, and other visual effects.</p><a href="#task1">Open gallery</a></article>
+          <article class="dashboard-card"><h3>Typography</h3><p>Scale text with relative units and clamp().</p><a href="#task4">Open typography</a></article>
+          <article class="dashboard-card"><h3>Media Queries</h3><p>Adjust columns for tablet and mobile screens.</p><a href="#task3">Open cards</a></article>
+          <article class="dashboard-card"><h3>Cheat Sheet Links</h3><p>Quick examples of Grid, Flexbox, filters, and breakpoints.</p><a href="#task6">Open cheat sheet</a></article>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="page-footer">Responsive CSS Assignment | Contact: student@example.com</footer>
+</body>
+</html>
